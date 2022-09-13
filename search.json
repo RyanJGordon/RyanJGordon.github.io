@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Education\nBachelor of Science in Marketing from the University of Texas at Dallas.\n\nplot(Titanic)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ryan Gordon",
+    "section": "",
+    "text": "plot(iris, pch=20, cex=.5, col=\"firebrick\")"
+  }
+]
