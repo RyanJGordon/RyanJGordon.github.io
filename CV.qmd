@@ -1,5 +1,0 @@
----
-title: "CV"
----
-
-![](images/Resume-01.png)
