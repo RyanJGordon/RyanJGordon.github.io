@@ -59,6 +59,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -99,7 +100,40 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#library" id="toc-library" class="nav-link active" data-scroll-target="#library">Library</a></li>
+  <li><a href="#data-loading-and-editing" id="toc-data-loading-and-editing" class="nav-link" data-scroll-target="#data-loading-and-editing">Data loading and editing</a></li>
+  <li><a href="#paste-all-lyrics-for-year-into-one-line-of-dataframe" id="toc-paste-all-lyrics-for-year-into-one-line-of-dataframe" class="nav-link" data-scroll-target="#paste-all-lyrics-for-year-into-one-line-of-dataframe">Paste all lyrics for year into one line of dataframe</a></li>
+  <li><a href="#text-analysis" id="toc-text-analysis" class="nav-link" data-scroll-target="#text-analysis">Text analysis</a></li>
+  <li><a href="#pull-top-100-words-of-each-year" id="toc-pull-top-100-words-of-each-year" class="nav-link" data-scroll-target="#pull-top-100-words-of-each-year">Pull top 100 words of each year</a>
+  <ul class="collapse">
+  <li><a href="#replace-profanity-with-placeholder-letters" id="toc-replace-profanity-with-placeholder-letters" class="nav-link" data-scroll-target="#replace-profanity-with-placeholder-letters">Replace profanity with placeholder letters</a></li>
+  <li><a href="#word-cloud-with-top-50-words" id="toc-word-cloud-with-top-50-words" class="nav-link" data-scroll-target="#word-cloud-with-top-50-words">Word cloud with top 50 words</a></li>
+  </ul></li>
+  <li><a href="#identify-which-words-are-not-being-matched-with-lexicon" id="toc-identify-which-words-are-not-being-matched-with-lexicon" class="nav-link" data-scroll-target="#identify-which-words-are-not-being-matched-with-lexicon">Identify which words are not being matched with lexicon</a>
+  <ul class="collapse">
+  <li><a href="#save-as-csv-files" id="toc-save-as-csv-files" class="nav-link" data-scroll-target="#save-as-csv-files">Save as CSV files</a></li>
+  </ul></li>
+  <li><a href="#combine-bing-spanish-and-self-created-sentiment-values" id="toc-combine-bing-spanish-and-self-created-sentiment-values" class="nav-link" data-scroll-target="#combine-bing-spanish-and-self-created-sentiment-values">Combine bing, spanish and self-created sentiment values</a></li>
+  <li><a href="#pull-out-words-not-matched-to-new-lexicons" id="toc-pull-out-words-not-matched-to-new-lexicons" class="nav-link" data-scroll-target="#pull-out-words-not-matched-to-new-lexicons">Pull out words not matched to new lexicons</a></li>
+  <li><a href="#analyze-with-new-values" id="toc-analyze-with-new-values" class="nav-link" data-scroll-target="#analyze-with-new-values">Analyze with new values</a>
+  <ul class="collapse">
+  <li><a href="#create-visualizations" id="toc-create-visualizations" class="nav-link" data-scroll-target="#create-visualizations">Create visualizations</a>
+  <ul class="collapse">
+  <li><a href="#libraryggplot2" id="toc-libraryggplot2" class="nav-link" data-scroll-target="#libraryggplot2">library(ggplot2)</a></li>
+  <li><a href="#libraryrcolorbrewer" id="toc-libraryrcolorbrewer" class="nav-link" data-scroll-target="#libraryrcolorbrewer">library(RColorBrewer)</a></li>
+  <li><a href="#libraryggthemes" id="toc-libraryggthemes" class="nav-link" data-scroll-target="#libraryggthemes">library(ggthemes)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#calculate-summary-statistics-for-audio-analysis" id="toc-calculate-summary-statistics-for-audio-analysis" class="nav-link" data-scroll-target="#calculate-summary-statistics-for-audio-analysis">Calculate summary statistics for audio analysis</a></li>
+  <li><a href="#unique-words-from-each-year" id="toc-unique-words-from-each-year" class="nav-link" data-scroll-target="#unique-words-from-each-year">Unique words from each year</a></li>
+  <li><a href="#analyzing-covid-specific-songs" id="toc-analyzing-covid-specific-songs" class="nav-link" data-scroll-target="#analyzing-covid-specific-songs">Analyzing covid-specific songs</a></li>
+  <li><a href="#analyze-counts-of-words-not-being-matched" id="toc-analyze-counts-of-words-not-being-matched" class="nav-link" data-scroll-target="#analyze-counts-of-words-not-being-matched">Analyze counts of words not being matched</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -122,8 +156,397 @@ ul.task-list li input[type="checkbox"] {
 
 <p><strong>Assignments:</strong></p>
 <p><a href="https://docs.google.com/document/d/1111z8DyjJPs0QjofMej3um9PaZyIy73baCyUyrsMAQU/edit?usp=sharing" class="uri">https://docs.google.com/document/d/1111z8DyjJPs0QjofMej3um9PaZyIy73baCyUyrsMAQU/edit?usp=sharing</a></p>
+<p><strong>Group Project:</strong></p>
+<ol type="1">
+<li>Script: Analysis File</li>
+</ol>
+<p>```{r# EPPS 6302 Group Project Analysis File} # By: Genna Campain, Ryan gordon, Su Lin Goh, Michelle Kim</p>
+<section id="library" class="level1">
+<h1>Library</h1>
+<p>library(spotifyr) library(magrittr) library(geniusr) library(dplyr) library(tidyverse) library(tidytext) library(textdata) library(stringr) library(readr)</p>
+</section>
+<section id="data-loading-and-editing" class="level1">
+<h1>Data loading and editing</h1>
+<p>load(“~/Desktop/Fall 2022/Data methods/Group Project/lyrics_data.Rda”) final_df<span class="math inline">\(num &lt;- seq.int(from = 1, to = 250) final_df\)</span>year &lt;- 2018 final_df<span class="math inline">\(year[which(final_df\)</span>num &gt; 50 &amp; final_df<span class="math inline">\(num &lt; 101)] &lt;- 2019 final_df\)</span>year[which(final_df<span class="math inline">\(num &gt; 100 &amp; final_df\)</span>num &lt; 151)] &lt;- 2020 final_df<span class="math inline">\(year[which(final_df\)</span>num &gt; 150 &amp; final_df<span class="math inline">\(num &lt; 201)] &lt;- 2021 final_df\)</span>year[which(final_df$num &gt; 200)] &lt;- 2022</p>
+</section>
+<section id="paste-all-lyrics-for-year-into-one-line-of-dataframe" class="level1">
+<h1>Paste all lyrics for year into one line of dataframe</h1>
+<p>df2 &lt;- final_df %&gt;% group_by(year) %&gt;% summarise(col = paste(lyrics, collapse=” “))</p>
+</section>
+<section id="text-analysis" class="level1">
+<h1>Text analysis</h1>
+<p>sp_stop_words &lt;- spanish_stopwords &lt;- read.table(“~/Desktop/Fall 2022/Data methods/Group Project/spanish_stopwords.txt”, quote=“"”, comment.char=““) %&gt;% rename(word = V1) count_result &lt;- data.frame() afinn_result &lt;- data.frame() bing_and_nrc_result &lt;- data.frame() for(j in 2018:2022) { text &lt;- df2<span class="math inline">\(col[which(df2\)</span>year == j)] tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;% anti_join(stop_words) %&gt;% anti_join(sp_stop_words) # Count of common words count &lt;- tidy_lyrics %&gt;% count(word, sort = TRUE) %&gt;% mutate(year = j) count_result &lt;- rbind(count_result, count) # Sentiment analysis using afinn afinn &lt;- get_sentiments(”afinn”) afinn_text &lt;- tidy_lyrics %&gt;% inner_join(afinn) %&gt;% summarise(sentiment = sum(value)) %&gt;% mutate(method = “AFINN”) %&gt;% mutate(year = j) afinn_result &lt;- rbind(afinn_result, afinn_text) # Sentiment analysis using bing and nrc bing_and_nrc &lt;- bind_rows( tidy_lyrics %&gt;% inner_join(get_sentiments(“bing”)) %&gt;% mutate(method = “Bing et al.”), tidy_lyrics %&gt;% inner_join(get_sentiments(“nrc”) %&gt;% filter(sentiment %in% c(“positive”, “negative”)) ) %&gt;% mutate(method = “NRC”)) %&gt;% count(method, sentiment) %&gt;% pivot_wider(names_from = sentiment, values_from = n, values_fill = 0) %&gt;% mutate(sentiment = positive - negative) %&gt;% mutate(year = j) bing_and_nrc_result &lt;- rbind(bing_and_nrc_result, bing_and_nrc) }</p>
+</section>
+<section id="pull-top-100-words-of-each-year" class="level1">
+<h1>Pull top 100 words of each year</h1>
+<p>top100words &lt;- count_result %&gt;% group_by(year) %&gt;% mutate(rown = row_number()) %&gt;% ungroup() top100words &lt;- top100words[which(top100words$rown &lt;= 100), ]</p>
+<section id="replace-profanity-with-placeholder-letters" class="level2">
+<h2 class="anchored" data-anchor-id="replace-profanity-with-placeholder-letters">Replace profanity with placeholder letters</h2>
+<p>top100words<span class="math inline">\(word[top100words\)</span>word == ‘shit’] &lt;- ‘s<strong><em>’ top100words<span class="math inline">\(word[top100words\)</span>word == ’nigga’] &lt;- ’n</em></strong><em>’ top100words<span class="math inline">\(word[top100words\)</span>word == ’niggas’] &lt;- ’n</em>****’ top100words<span class="math inline">\(word[top100words\)</span>word == ‘bitch’] &lt;- ‘b****’ top100words<span class="math inline">\(word[top100words\)</span>word == ‘fuck’] &lt;- ’f***’ top100words<span class="math inline">\(word[top100words\)</span>word == ‘ass’] &lt;- ‘a<strong>’ top100words<span class="math inline">\(word[top100words\)</span>word == ’pussy’] &lt;- ’p’ top100words<span class="math inline">\(word[top100words\)</span>word == ’fuckin’] &lt;- ’f<em>’ top100words<span class="math inline">\(word[top100words\)</span>word == ’mothafuckin’] &lt;- ’m</em></strong><em>f</em>****’</p>
+</section>
+<section id="word-cloud-with-top-50-words" class="level2">
+<h2 class="anchored" data-anchor-id="word-cloud-with-top-50-words">Word cloud with top 50 words</h2>
+<p>library(wordcloud2) library(htmlwidgets) words2018 &lt;- top100words[which(top100words<span class="math inline">\(year == 2018), ] %&gt;%  select(word, n) words2019 &lt;- top100words[which(top100words\)</span>year == 2019), ] %&gt;% select(word, n) words2020 &lt;- top100words[which(top100words<span class="math inline">\(year == 2020), ] %&gt;%  select(word, n) words2021 &lt;- top100words[which(top100words\)</span>year == 2021), ] %&gt;% select(word, n) words2022 &lt;- top100words[which(top100words$year == 2022), ] %&gt;% select(word, n) hw1 = wordcloud2(words2018, shape = ‘triangle’) hw2 = wordcloud2(words2019, shape = ‘triangle’) hw3 = wordcloud2(words2020, shape = ‘triangle’) hw4 = wordcloud2(words2021, shape = ‘triangle’) hw5 = wordcloud2(words2022, shape = ‘triangle’) saveWidget(hw1,“1.html”,selfcontained = F) webshot::webshot(“1.html”,“1.png”,vwidth = 1992, vheight = 1744, delay =10) saveWidget(hw2,“2.html”,selfcontained = F) webshot::webshot(“2.html”,“2.png”,vwidth = 1992, vheight = 1744, delay =10) saveWidget(hw3,“3.html”,selfcontained = F) webshot::webshot(“3.html”,“3.png”,vwidth = 1992, vheight = 1744, delay =10) saveWidget(hw4,“4.html”,selfcontained = F) webshot::webshot(“4.html”,“4.png”,vwidth = 1992, vheight = 1744, delay =10) saveWidget(hw5,“5.html”,selfcontained = F) webshot::webshot(“5.html”,“5.png”,vwidth = 1992, vheight = 1744, delay =10)</p>
+</section>
+</section>
+<section id="identify-which-words-are-not-being-matched-with-lexicon" class="level1">
+<h1>Identify which words are not being matched with lexicon</h1>
+<p>text &lt;- df2$col tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;% anti_join(stop_words) %&gt;% anti_join(sp_stop_words) # Pull out words not matched to afinn afinn &lt;- get_sentiments(“afinn”) not_matched_afinn &lt;- tidy_lyrics %&gt;% anti_join(afinn) %&gt;% unique() # Pull out words not matched to bing and nrc not_matched_bing &lt;- tidy_lyrics %&gt;% anti_join(get_sentiments(“bing”)) %&gt;% unique() not_matched_nrc &lt;- tidy_lyrics %&gt;% anti_join(get_sentiments(“nrc”))%&gt;% unique() # Spanish language analysis pos_sp &lt;- read_csv(“isol/positivas_mejorada.csv”, col_names = FALSE) %&gt;% mutate(score = 1) neg_sp &lt;- read_csv(“isol/negativas_mejorada.csv”, col_names = FALSE) %&gt;% mutate(score = -1) sp_sent &lt;- rbind(pos_sp, neg_sp) %&gt;% rename(word = X1) # sp_text &lt;- tidy_lyrics %&gt;% # inner_join(sp_sent) %&gt;% # summarise(sentiment = sum(score))</p>
+<section id="save-as-csv-files" class="level2">
+<h2 class="anchored" data-anchor-id="save-as-csv-files">Save as CSV files</h2>
+<p>setwd(“~/Desktop/Fall 2022/Data methods/Group Project”) write.csv(not_matched_afinn,“Not matched afinn.csv”, row.names = FALSE) write.csv(not_matched_bing_and_nrc,“Not matched bingnrc.csv”, row.names = FALSE)</p>
+</section>
+</section>
+<section id="combine-bing-spanish-and-self-created-sentiment-values" class="level1">
+<h1>Combine bing, spanish and self-created sentiment values</h1>
+<p>bing_sent &lt;- get_sentiments(“bing”) %&gt;% rename(score = sentiment) bing_sent<span class="math inline">\(score[bing_sent\)</span>score == ‘positive’] &lt;- 1 bing_sent<span class="math inline">\(score[bing_sent\)</span>score == ‘negative’] &lt;- -1 our_sent &lt;- read_excel(“Not matched bingnrc.xlsx”) %&gt;% rename(score = “…3”) %&gt;% na.omit() %&gt;% select(word, score) mix_sent &lt;- rbind(bing_sent, sp_sent) %&gt;% rbind(our_sent) mix_sent<span class="math inline">\(score &lt;- as.numeric(mix_sent\)</span>score)</p>
+<p>bing_sp_sent &lt;- rbind(bing_sent, sp_sent) bing_sp_sent<span class="math inline">\(score &lt;- as.numeric(bing_sp_sent\)</span>score)</p>
+</section>
+<section id="pull-out-words-not-matched-to-new-lexicons" class="level1">
+<h1>Pull out words not matched to new lexicons</h1>
+<p>not_matched_spb &lt;- tidy_lyrics %&gt;% anti_join(bing_sp_sent)%&gt;% unique() not_matched_mix &lt;- tidy_lyrics %&gt;% anti_join(mix_sent)%&gt;% unique()</p>
+</section>
+<section id="analyze-with-new-values" class="level1">
+<h1>Analyze with new values</h1>
+<p>mix_result &lt;- data.frame() for(j in 2018:2022) { text &lt;- df2<span class="math inline">\(col[which(df2\)</span>year == j)] tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;% anti_join(stop_words) %&gt;% anti_join(sp_stop_words) # Sentiment analysis using self-created lexicon mix_text &lt;- tidy_lyrics %&gt;% inner_join(mix_sent) %&gt;% summarise(sentiment = sum(score)) %&gt;% mutate(method = “mixed”) %&gt;% mutate(year = j) mix_result &lt;- rbind(mix_result, mix_text) }</p>
+<p>bing_sp_result &lt;- data.frame() for(j in 2018:2022) { text &lt;- df2<span class="math inline">\(col[which(df2\)</span>year == j)] tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;% anti_join(stop_words) %&gt;% anti_join(sp_stop_words) # Sentiment analysis using self-created lexicon bing_sp_text &lt;- tidy_lyrics %&gt;% inner_join(bing_sp_sent) %&gt;% summarise(sentiment = sum(score)) %&gt;% mutate(method = “bing_sp”) %&gt;% mutate(year = j) bing_sp_result &lt;- rbind(bing_sp_result, bing_sp_text) }</p>
+<section id="create-visualizations" class="level2">
+<h2 class="anchored" data-anchor-id="create-visualizations">Create visualizations</h2>
+<p>bing &lt;- bing_and_nrc_result[which(bing_and_nrc_result<span class="math inline">\(method == "Bing et al."), ] %&gt;%  select(sentiment, year) %&gt;%  mutate(method = "Bing") nrc &lt;- bing_and_nrc_result[which(bing_and_nrc_result\)</span>method == “NRC”), ] %&gt;% select(sentiment, year) %&gt;% mutate(method = “NRC”) afinn &lt;- afinn_result %&gt;% select(sentiment, year, method) bing_sp &lt;- bing_sp_result %&gt;% select(sentiment, year) %&gt;% mutate(method = “Bing_sp”) mix &lt;- mix_result %&gt;% select(sentiment, year) %&gt;% mutate(method = “Mix”) big_df &lt;- rbind(bing, nrc) %&gt;% rbind(afinn) %&gt;% rbind(bing_sp) %&gt;% rbind(mix) %&gt;% rename(Year = year, Method = method) big_df<span class="math inline">\(Year &lt;- as.factor(big_df\)</span>Year) save(big_df, file=“all sentiments combined.Rda”)</p>
+<section id="libraryggplot2" class="level3">
+<h3 class="anchored" data-anchor-id="libraryggplot2">library(ggplot2)</h3>
+</section>
+<section id="libraryrcolorbrewer" class="level3">
+<h3 class="anchored" data-anchor-id="libraryrcolorbrewer">library(RColorBrewer)</h3>
+</section>
+<section id="libraryggthemes" class="level3">
+<h3 class="anchored" data-anchor-id="libraryggthemes">library(ggthemes)</h3>
+<p>ggplot(big_df, aes(x = Year, y = sentiment, fill = Method)) + geom_bar(stat = “identity”, position = “dodge”) + theme_minimal() + labs(x = “Year”, y = “Sentiment Score”) + scale_fill_brewer(palette = “Set1”)</p>
+</section>
+</section>
+</section>
+<section id="calculate-summary-statistics-for-audio-analysis" class="level1">
+<h1>Calculate summary statistics for audio analysis</h1>
+<p>load(“~/Desktop/Fall 2022/Data methods/Group Project/playlist audio features.Rda”) sum_songs_ana &lt;- songs_ana %&gt;% group_by(year) %&gt;% summarise(m_dance = mean(danceability), m_valence = mean(valence), m_acoustic = mean(acousticness)) sum_songs_ana<span class="math inline">\(year &lt;- as.factor(sum_songs_ana\)</span>year)</p>
+<p>songs_ana<span class="math inline">\(year &lt;- as.factor(songs_ana\)</span>year)</p>
+<p>ggplot(songs_ana, aes(valence, fill = year)) + geom_density() + facet_grid(year ~ .) + theme_minimal() + theme(legend.position = “none”) + scale_fill_brewer(palette = “Set1”) + labs(x = “Valence”, y = “Density”)</p>
+<p>ggplot(songs_ana, aes(danceability, fill = year)) + geom_density() + facet_grid(year ~ .) + theme_minimal() + theme(legend.position = “none”) + scale_fill_brewer(palette = “Set1”) + labs(x = “Danceability”, y = “Density”)</p>
+<p>ggplot(songs_ana, aes(acousticness, fill = year)) + geom_density() + facet_grid(year ~ .) + theme_minimal() + theme(legend.position = “none”) + scale_fill_brewer(palette = “Set1”) + labs(x = “Acousticness”, y = “Density”)</p>
+<p>df1 &lt;- sum_songs_ana %&gt;% select(year, m_dance) %&gt;% mutate(Characteristic = “Danceability”) %&gt;% rename(Value = m_dance) df2 &lt;- sum_songs_ana %&gt;% select(year, m_valence) %&gt;% mutate(Characteristic = “Valence”) %&gt;% rename(Value = m_valence) df3 &lt;- sum_songs_ana %&gt;% select(year, m_acoustic) %&gt;% mutate(Characteristic = “Acousticness”) %&gt;% rename(Value = m_acoustic) sum_songs_ana &lt;- rbind(df1, df2) %&gt;% rbind(df3) sum_songs_ana<span class="math inline">\(Year &lt;- as.factor(sum_songs_ana\)</span>year)</p>
+<p>ggplot(sum_songs_ana, aes(x = Year, y = Value, fill = Characteristic)) + geom_bar(stat = “identity”, position = “dodge”) + theme_minimal() + labs(x = “Year”, y = “Value”) + scale_fill_brewer(palette = “Set1”)</p>
+</section>
+<section id="unique-words-from-each-year" class="level1">
+<h1>Unique words from each year</h1>
+<p>count_result &lt;- data.frame() for(j in 2018:2022) { text &lt;- df2<span class="math inline">\(col[which(df2\)</span>year == j)] tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;% anti_join(stop_words) %&gt;% anti_join(sp_stop_words)</p>
+<p># Count of common words count &lt;- tidy_lyrics %&gt;% count(word, sort = TRUE) %&gt;% mutate(year = j) count_result &lt;- rbind(count_result, count) } words2018 &lt;- count_result[which(count_result<span class="math inline">\(year == 2018), ] %&gt;%  select(word) words2019 &lt;- count_result[which(count_result\)</span>year == 2019), ] %&gt;% select(word) words2020 &lt;- count_result[which(count_result<span class="math inline">\(year == 2020), ] %&gt;%  select(word) words2021 &lt;- count_result[which(count_result\)</span>year == 2021), ] %&gt;% select(word) words2022 &lt;- count_result[which(count_result$year == 2022), ] %&gt;% select(word)</p>
+<p>u_words2020 &lt;- words2020 %&gt;% anti_join(words2018) %&gt;% anti_join(words2019) %&gt;% anti_join(words2021) %&gt;% anti_join(words2022) %&gt;% inner_join(count_result[which(count_result<span class="math inline">\(year == 2020), ]) %&gt;%  select(word, n) u_words2020 &lt;- u_words2020[1:100,] u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'shit'] &lt;- 's***' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'nigga'] &lt;- 'n****' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'niggas'] &lt;- 'n*****' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'bitch'] &lt;- 'b****' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'fuck'] &lt;- 'f***' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'ass'] &lt;- 'a**' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'pussy'] &lt;- 'p****' u_words2020\)</span>word[u_words2020<span class="math inline">\(word == 'fuckin'] &lt;- 'f*****' u_words2020\)</span>word[u_words2020$word == ‘mothafuckin’] &lt;- ‘m****f*****’ hw7 = wordcloud2(u_words2020, shape = ‘triangle’) saveWidget(hw7,“7.html”,selfcontained = F) webshot::webshot(“7.html”,“7.png”,vwidth = 1992, vheight = 1744, delay =10)</p>
+</section>
+<section id="analyzing-covid-specific-songs" class="level1">
+<h1>Analyzing covid-specific songs</h1>
+<p>text &lt;- final_df2<span class="math inline">\(col tibble &lt;- tibble(line = 1, text = text) tidy_lyrics &lt;- unnest_tokens(tibble, word, text) data(stop_words) tidy_lyrics &lt;- tidy_lyrics %&gt;%  anti_join(stop_words) # Count of common words count &lt;- tidy_lyrics %&gt;%  count(word, sort = TRUE) # Sentiment analysis using afinn afinn &lt;- get_sentiments("afinn") afinn_text &lt;- tidy_lyrics %&gt;%  inner_join(afinn) %&gt;%  summarise(sentiment = sum(value)) %&gt;%  mutate(method = "AFINN") # Sentiment analysis using bing and nrc bing_and_nrc &lt;- bind_rows(  tidy_lyrics %&gt;%  inner_join(get_sentiments("bing")) %&gt;%  mutate(method = "Bing et al."),  tidy_lyrics %&gt;%  inner_join(get_sentiments("nrc") %&gt;%  filter(sentiment %in% c("positive",  "negative"))  ) %&gt;%  mutate(method = "NRC")) %&gt;%  count(method, sentiment) %&gt;%  pivot_wider(names_from = sentiment,  values_from = n,  values_fill = 0) %&gt;%  mutate(sentiment = positive - negative) ## word cloud ## Replace profanity with placeholder letters count\)</span>word[count<span class="math inline">\(word == 'shit'] &lt;- 's***' count\)</span>word[count<span class="math inline">\(word == 'nigga'] &lt;- 'n****' count\)</span>word[count<span class="math inline">\(word == 'niggas'] &lt;- 'n*****' count\)</span>word[count<span class="math inline">\(word == 'bitch'] &lt;- 'b****' count\)</span>word[count<span class="math inline">\(word == 'fuck'] &lt;- 'f***' count\)</span>word[count<span class="math inline">\(word == 'ass'] &lt;- 'a**' count\)</span>word[count<span class="math inline">\(word == 'pussy'] &lt;- 'p****' count\)</span>word[count<span class="math inline">\(word == 'fuckin'] &lt;- 'f*****' count\)</span>word[count$word == ‘mothafuckin’] &lt;- ‘m****f*****’ hw6 = wordcloud2(count, shape = ‘triangle’) saveWidget(hw6,“6.html”,selfcontained = F) webshot::webshot(“6.html”,“6.png”,vwidth = 1992, vheight = 1744, delay =10)</p>
+</section>
+<section id="analyze-counts-of-words-not-being-matched" class="level1">
+<h1>Analyze counts of words not being matched</h1>
+<p>not_matched_d &lt;- c(“AFINN”, 5846, “Bing”, 5680, “NRC”, 5421, “Bing_sp”, 5502, “Mix”, 4618) not_matched &lt;- matrix(not_matched_d, nrow = 5, ncol = 2, byrow = TRUE) %&gt;% as.data.frame() colnames(not_matched) &lt;- c(“Lexicon”, “Unmatched”) not_matched<span class="math inline">\(total &lt;- 37093 not_matched\)</span>Unmatched &lt;- as.numeric(not_matched<span class="math inline">\(Unmatched) not_matched\)</span>pct_unmatched &lt;- (not_matched<span class="math inline">\(Unmatched/not_matched\)</span>total)*100 ggplot(not_matched, aes(x = Lexicon, y = pct_unmatched, fill = Lexicon)) + geom_bar(stat = “identity”, position = “dodge”, show.legend = FALSE) + theme_minimal() + labs(x = “Lexicon”, y = “Percent of Words Unmatched”) + scale_fill_brewer(palette = “Set1”)</p>
+<p>}</p>
+<p>```</p>
+<ol start="2" type="1">
+<li><p>Project RMD:</p>
+<pre class="{r}---}"><code>title: "Data Methods Group Project"
+author: "Genna Campain"
+date: "9/10/2022"
+output: html_document
+---
+# Scrape and edit top songs lists
+Load packages
+library(spotifyr)
+library(magrittr)
+library(geniusr)
+library(dplyr)
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(stringr)
+Access token
+id &lt;- "9bd81604c1724db4b9ad68f64dd7fbfe"
+secret &lt;- "791feacce6c143f5bf2ecb23d517e055"
+Sys.setenv(SPOTIFY_CLIENT_ID = id)
+Sys.setenv(SPOTIFY_CLIENT_SECRET = secret)
+access_token &lt;- get_spotify_access_token()
+token &lt;- "QPPNNpRdh3O3T-e7LbSGTeYzIefKe1ZL6CeoR26DKwRxdMbln6audf3TNViNVhEG"
+Sys.setenv(GENIUS_API_TOKEN = token)
+Scraping top 100 songs of the year playlists
+year_id &lt;- data.frame(id = c("37i9dQZF1DXe2bobNYDtW8", "37i9dQZF1DWVRSukIED0e9", "37i9dQZF1DX7Jl5KP2eZaS", "5GhQiRkGuqzpWZSE7OU4Se", "37i9dQZF1DX18jTM2l2fJY"), year = 2018:2022)
+
+top_songs &lt;- data.frame()
+for(j in 1:5) {
+playlist_id &lt;- year_id[j, 1]
+year &lt;- year_id[j, 2]
+tracks &lt;- get_playlist_tracks(
+    playlist_id = playlist_id,
+    fields = c("track.artists", "track.duration_ms", "track.explicit", "track.id", "track.name", "track.popularity", "track.album.name", "track.album.release.date")
+) %&gt;%
+  mutate(year = year)
+top_songs &lt;- rbind(top_songs, tracks)
+}
+Subset to take top 50 songs by year, unpack artist names
+top_songs &lt;- top_songs %&gt;% 
+  group_by(year) %&gt;% 
+  mutate(rown = row_number()) %&gt;%
+  ungroup()
+top_songs &lt;- top_songs[which(top_songs$rown &lt;= 50), ]
+
+artists &lt;- top_songs$track.artists
+artists2 &lt;- matrix(0, 0, nrow = 250, ncol = 1)
+for(j in 1:250){ 
+     df &lt;- artists[[j]]
+     name &lt;- df$name
+     artists2[j] &lt;- name
+}
+top_songs &lt;- cbind(top_songs, artists2)
+songinfo &lt;- select(top_songs, c(track.name, artists2, year)) %&gt;%
+  rename(track.artists = artists2)
+# Scrape song lyrics
+Edit song and artist names to match Genius website
+songinfo$track.name &lt;- gsub("\\s*\\([^\\)]+\\)","",as.character(songinfo$track.name))
+songinfo2018 &lt;- songinfo[which(songinfo$year == 2018), ]
+songinfo2019 &lt;- songinfo[which(songinfo$year == 2019), ]
+songinfo2020 &lt;- songinfo[which(songinfo$year == 2020), ]
+songinfo2021 &lt;- songinfo[which(songinfo$year == 2021), ]
+songinfo2022 &lt;- songinfo[which(songinfo$year == 2022), ]
 
 
+# 2018
+songinfo2018[19, 1] &lt;- "LOVE."
+songinfo2018[15, 2] &lt;- "Lil Baby and Drake"
+songinfo2018[6, 2] &lt;- "Juice wrld"
+songinfo2018[13, 1] &lt;- "happier"
+songinfo2018[17, 2] &lt;- "Offset and Metro Boomin"
+songinfo2018[21, 2] &lt;- "Anne marie"
+songinfo2018[32, 2] &lt;- "Dynoro and gigi dagostino"
+songinfo2018[33, 2] &lt;- "G Eazy and Halsey"
+songinfo2018[33, 1] &lt;- "Him and I"
+songinfo2018[36, 1] &lt;- "Te bote"
+songinfo2018[39, 1] &lt;- "1 2 3"
+songinfo2018[39, 2] &lt;- "Sofia Reyes"
+songinfo2018[41, 2] &lt;- "Hailee Steinfeld and Alesso"
+songinfo2018[48, 1] &lt;- "Dejala Que Vuelva"
+# 2019
+songinfo2019[3, 2] &lt;- "Shawn Mendes and Camila Cabello"
+songinfo2019[3, 1] &lt;- "Senorita"
+songinfo2019[5, 1] &lt;- "Sunflower"
+songinfo2019[44, 1] &lt;- "10000 hours"
+songinfo2019[44, 2] &lt;- "Dan shay"
+# 2020
+songinfo2020[21, 2] &lt;- "Jawsh 685 and Jason Derulo"
+songinfo2020[21, 1] &lt;- "Savage love laxed siren beat"
+songinfo2020[26, 1] &lt;- "Senorita"
+songinfo2020[26, 2] &lt;- "Shawn Mendes and Camila Cabello"
+songinfo2020[38, 1] &lt;- "Sunflower"
+songinfo2020[39, 1] &lt;- "Hawai"
+songinfo2020[42, 1] &lt;- "ritmo bad boys for life"
+songinfo2020[42, 2] &lt;- "The black eyed peas and j balvin"
+songinfo2020[47, 2] &lt;- "Ariana Grande and Justin Bieber"
+
+# 2021
+songinfo2021[2, 1] &lt;- "Montero Call Me by Your Name"
+songinfo2021[10, 1] &lt;- "Beggin"
+songinfo2021[10, 2] &lt;- "Maneskin"
+songinfo2021[12, 1] &lt;- "Dakiti"
+songinfo2021[17, 2] &lt;- "Silk Sonic"
+songinfo2021[21, 2] &lt;- "Tiesto"
+songinfo2021[25, 2] &lt;- "Riton and Nightcrawlers"
+songinfo2021[25, 1] &lt;- "Friday dopamine re edit"
+songinfo2021[26, 1] &lt;- "telepatia"
+songinfo2021[33, 2] &lt;- "Myke Towers and Juhn"
+songinfo2021[34, 2] &lt;- "Maneskin"
+songinfo2021[46, 1] &lt;- "Que Mas Pues"
+songinfo2021[48, 1] &lt;- "34 35"
+songinfo2021[50, 1] &lt;- "Pareja Del Ano"
+songinfo2021[50, 2] &lt;- "Sebastian yatra and Myke Towers"
+
+# 2022
+songinfo2022[5, 1] &lt;- "Titi Me Pregunto"
+songinfo2022[7, 1] &lt;- "Enemy"
+songinfo2022[8, 1] &lt;- "quevedo bzrp music sessions vol 52"
+songinfo2022[8, 2] &lt;- "Bizarrap and quevedo"
+songinfo2022[10, 1] &lt;- "Running up that hill a deal with god"
+songinfo2022[19, 2] &lt;- "Elley Duhe"
+songinfo2022[22, 2] &lt;- "Rauw alejandro and chencho corleone"
+songinfo2022[29, 2] &lt;- "Lost frequencies and calum scott"
+songinfo2022[36, 1] &lt;- "I Aint Worried"
+songinfo2022[39, 1] &lt;- "Una Noche en Medellin"
+songinfo2022[42, 2] &lt;- "Bad Bunny &amp; Rauw Alejandro"
+songinfo2022[44, 2] &lt;- "Tiesto"
+Loop for scraping (for some reason loop randomly breaks if too many numbers)
+# 2018
+final_df &lt;- data.frame()
+for(j in 48:50) {
+  artist_name &lt;- songinfo2018[j, 2]
+  song_title &lt;- songinfo2018[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ") 
+  final_df &lt;- rbind(final_df, df)
+}
+
+# 2019
+for(j in 48:50) {
+  artist_name &lt;- songinfo2019[j, 2]
+  song_title &lt;- songinfo2019[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ") 
+  final_df &lt;- rbind(final_df, df)
+}
+
+# 2020
+for(j in 47:50) {
+  artist_name &lt;- songinfo2020[j, 2]
+  song_title &lt;- songinfo2020[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ") 
+  final_df &lt;- rbind(final_df, df)
+}
+
+# 2021
+for(j in 48:50) {
+  artist_name &lt;- songinfo2021[j, 2]
+  song_title &lt;- songinfo2021[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ")
+  final_df &lt;- rbind(final_df, df)
+}
+
+# 2022
+final_df &lt;- data.frame()
+for(j in 44:50) {
+  artist_name &lt;- songinfo2022[j, 2]
+  song_title &lt;- songinfo2022[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ")
+  final_df &lt;- rbind(final_df, df)
+}
+
+colnames(final_df)[1] &lt;- "lyrics"
+setwd("~/Desktop/Fall 2022/Data methods/Group Project")
+save(final_df, file="lyrics_data.Rda")
+Label column and add year
+load("~/Desktop/Fall 2022/Data methods/Group Project/lyrics_data.Rda")
+final_df$num &lt;- seq.int(from = 1, to = 250)
+final_df$year &lt;- 2018
+final_df$year[which(final_df$num &gt; 50 &amp; final_df$num &lt; 101)] &lt;- 2019
+final_df$year[which(final_df$num &gt; 100 &amp; final_df$num &lt; 151)] &lt;- 2020
+final_df$year[which(final_df$num &gt; 150 &amp; final_df$num &lt; 201)] &lt;- 2021
+final_df$year[which(final_df$num &gt; 200)] &lt;- 2022
+Paste all lyrics for year into one line of dataframe
+https://stackoverflow.com/questions/54805201/how-to-paste-all-string-values-in-a-column-together-as-one 
+# insert year here
+df2 &lt;- final_df %&gt;%
+  group_by(year) %&gt;%
+  summarise(col = paste(lyrics, collapse=" "))
+df2 &lt;- df2 %&gt;%
+  ungroup()
+write.csv(df2,"lyrics_oneline.csv", row.names = FALSE)
+Text analysis
+count_result &lt;- data.frame()
+afinn_result &lt;- data.frame()
+bing_and_nrc_result &lt;- data.frame()
+for(j in 2018:2021) {
+text &lt;- df2$col[which(df2$year == j)]
+tibble &lt;- tibble(line = 1, text = text)
+tidy_lyrics &lt;- unnest_tokens(tibble, word, text)
+data(stop_words)
+tidy_lyrics &lt;- tidy_lyrics %&gt;%
+  anti_join(stop_words)
+# Count of common words
+count &lt;- tidy_lyrics %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  mutate(year = j)
+count_result &lt;- rbind(count_result, count)
+# Sentiment analysis using afinn
+afinn &lt;- get_sentiments("afinn")
+afinn_text &lt;- tidy_lyrics %&gt;% 
+  inner_join(afinn) %&gt;% 
+  summarise(sentiment = sum(value)) %&gt;% 
+  mutate(method = "AFINN") %&gt;%
+  mutate(year = j)
+afinn_result &lt;- rbind(afinn_result, afinn_text)
+# Sentiment analysis using bing and nrc
+bing_and_nrc &lt;- bind_rows(
+  tidy_lyrics %&gt;% 
+    inner_join(get_sentiments("bing")) %&gt;%
+    mutate(method = "Bing et al."),
+   tidy_lyrics %&gt;% 
+    inner_join(get_sentiments("nrc") %&gt;% 
+                 filter(sentiment %in% c("positive", 
+                                         "negative"))
+    ) %&gt;%
+    mutate(method = "NRC")) %&gt;%
+  count(method, sentiment) %&gt;%
+  pivot_wider(names_from = sentiment,
+              values_from = n,
+              values_fill = 0) %&gt;% 
+  mutate(sentiment = positive - negative) %&gt;%
+  mutate(year = j)
+bing_and_nrc_result &lt;- rbind(bing_and_nrc_result, bing_and_nrc)
+}
+
+Get audio features
+year_id &lt;- data.frame(id = c("37i9dQZF1DXe2bobNYDtW8", "37i9dQZF1DWVRSukIED0e9", "37i9dQZF1DX7Jl5KP2eZaS", "5GhQiRkGuqzpWZSE7OU4Se", "37i9dQZF1DX18jTM2l2fJY"), year = 2018:2022)
+
+songs_ana &lt;- data.frame()
+for(j in 1:5) {
+playlist_id &lt;- year_id[j, 1]
+year &lt;- year_id[j, 2]
+tracks &lt;- get_playlist_audio_features(
+  "spotify",
+  playlist_id) %&gt;%
+  mutate(year = year)
+songs_ana &lt;- rbind(songs_ana, tracks)
+}
+songs_ana &lt;- inner_join(songs_ana, top_songs, by = c("track.id", "year"))
+songs_ana &lt;- songs_ana %&gt;%
+  select(danceability, energy, key, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo, year, track.name.y, track.id)
+save(songs_ana, file="playlist audio features.Rda")
+# write.csv(songs_ana,"playlist audio features.csv", row.names = FALSE)
+Get lyrics for songs specifically about COVID-19
+covid_songs &lt;- read_excel("covid songs.xlsx") %&gt;%
+  as.matrix()
+final_df2 &lt;- data.frame()
+for(j in 7:23) {
+  artist_name &lt;-covid_songs[j, 2]
+  song_title &lt;- covid_songs[j, 1]
+  df &lt;- get_lyrics_search(artist_name = artist_name, song_title = song_title)
+  df &lt;- df$line
+  df &lt;- as.vector(df)
+  df&lt;- paste(df, collapse = " ") 
+  final_df2 &lt;- rbind(final_df2, df)
+}
+colnames(final_df2) &lt;- "lyrics"
+final_df2 &lt;- final_df2 %&gt;%
+  summarise(col = paste(lyrics, collapse=" "))
+save(final_df2, file="covid songs.Rda")
+
+
+
+
+
+
+
+</code></pre></li>
+</ol>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
